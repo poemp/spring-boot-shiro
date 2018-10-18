@@ -14,6 +14,13 @@ import javax.servlet.ServletResponse;
 public class ShiroLogoutFilter extends LogoutFilter {
 
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @Override
     protected boolean preHandle(ServletRequest request, ServletResponse response) throws Exception {
         //在这里执行退出系统前需要清空的数据
