@@ -10,6 +10,7 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.poem.config.credentials.CredentialsMatcher;
+import org.poem.config.filter.ShiroFormAuthenticationFilter;
 import org.poem.config.ralm.ShiroConfigRealm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,8 +79,6 @@ public class ShiroConfiguration {
     securityManager.setSessionManager(sessionManager());
     // <!-- 用户授权/认证信息Cache, 采用EhCache 缓存 -->
     securityManager.setCacheManager(ehCacheManager());
-    // 注入记住我管理器;
-    securityManager.setRememberMeManager(rememberMeManager());
     return securityManager;
   }
 
@@ -128,32 +127,6 @@ public class ShiroConfiguration {
     return sessionManager;
   }
 
-  /**
-   * cookie管理对象;
-   *
-   * @return
-   */
-  @Bean(name = "rememberMeManager")
-  public CookieRememberMeManager rememberMeManager() {
-    logger.info("ShiroConfiguration.rememberMeManager()");
-    CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
-    cookieRememberMeManager.setCookie(rememberMeCookie());
-    return cookieRememberMeManager;
-  }
-
-  /**
-   * 本地存储 cookie
-   * @return
-   */
-  @Bean(name = "rememberMeCookie")
-  public SimpleCookie rememberMeCookie() {
-    logger.info("ShiroConfiguration.rememberMeCookie()");
-    // 这个参数是cookie的名称，对应前端的checkbox的name = rememberMe
-    SimpleCookie simpleCookie = new SimpleCookie("rememberMe");
-    // <!-- 记住我cookie生效时间30天 ,单位秒;-->
-    simpleCookie.setMaxAge(259200);
-    return simpleCookie;
-  }
 
   /**
    * 自定义密码比较器
@@ -166,12 +139,8 @@ public class ShiroConfiguration {
     return new CredentialsMatcher();
   }
 
-  //
-  //  /** @return */
-  //  @Bean
-  //  public ShiroLogoutFilter getShiroLogoutFilter() {
-  //    ShiroLogoutFilter shiroLogoutFilter = new ShiroLogoutFilter();
-  //    shiroLogoutFilter.setRedirectUrl("/logout");
-  //    return shiroLogoutFilter;
-  //  }
+  @Bean
+  public ShiroFormAuthenticationFilter getShiroFormAuthenticationFilter(){
+    return new ShiroFormAuthenticationFilter();
+  }
 }
