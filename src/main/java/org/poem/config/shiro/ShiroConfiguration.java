@@ -13,7 +13,6 @@ import org.poem.config.credentials.CredentialsMatcher;
 import org.poem.config.ralm.ShiroConfigRealm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
@@ -57,7 +56,10 @@ public class ShiroConfiguration {
     return shiroFilterFactoryBean;
   }
 
-  /** @return */
+  /**
+   * 配置自定义的权限登录器
+   * @return
+   */
   @Bean
   public ShiroConfigRealm shiroConfigRealm() {
     ShiroConfigRealm shiroConfigRealm = new ShiroConfigRealm();
@@ -65,7 +67,10 @@ public class ShiroConfiguration {
     return shiroConfigRealm;
   }
 
-  /** @return */
+  /**
+   * 配置核心安全事务管理器
+   * @return
+   */
   @Bean
   public SecurityManager securityManager() {
     DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();

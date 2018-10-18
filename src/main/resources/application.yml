@@ -11,6 +11,6 @@ spring:
   jooq:
     sql-dialect: POSTGRES
 
-#logging:
-#  level:
-#    root: debug
+logging:
+  level:
+    root: debug
