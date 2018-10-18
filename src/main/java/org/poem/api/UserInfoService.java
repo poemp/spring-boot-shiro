@@ -12,5 +12,5 @@ public interface UserInfoService {
      * @param userName
      * @return
      */
-    public UserInfoVO findByUsername(String userName);
+    UserInfoVO findByUsername(String userName);
 }

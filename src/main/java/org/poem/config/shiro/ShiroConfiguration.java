@@ -9,7 +9,6 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.poem.config.credentials.CredentialsMatcher;
 import org.poem.config.filter.ShiroFormAuthenticationFilter;
-import org.poem.config.filter.ShiroLogoutFilter;
 import org.poem.config.ralm.ShiroConfigRealm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

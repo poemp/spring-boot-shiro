@@ -1,7 +1,5 @@
 package org.poem.vo;
 
-import java.util.List;
-
 /** @author poem */
 public class SysPermissionVO {
 
