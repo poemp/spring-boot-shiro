@@ -52,7 +52,7 @@ create table t_sys_user_role(
     primary key ("id")
 )WITH (OIDS=FALSE);
 
-INSERT INTO "t_user_info" ("id","username","name","password","salt","state") VALUES ('1', 'admin', '管理员', 'd3c59d25033dbf980d29554025c23a75', '8d78869f470951332959580424d4bf4f', 0);
+INSERT INTO "t_user_info" ("id","username","name","password","salt","state") VALUES ('1', 'admin', '管理员', '123456', '8d78869f470951332959580424d4bf4f', 0);
 INSERT INTO "t_sys_permission" ("id","available","name","parent_id","parent_ids","permission","resource_type","url") VALUES (1,0,'用户管理',0,'0/','userInfoVO:view','menu','userInfoVO/userList');
 INSERT INTO "t_sys_permission" ("id","available","name","parent_id","parent_ids","permission","resource_type","url") VALUES (2,0,'用户添加',1,'0/1','userInfoVO:add','button','userInfoVO/userAdd');
 INSERT INTO "t_sys_permission" ("id","available","name","parent_id","parent_ids","permission","resource_type","url") VALUES (3,0,'用户删除',1,'0/1','userInfoVO:del','button','userInfoVO/userDel');
