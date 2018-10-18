@@ -3,6 +3,7 @@ package org.poem.config.shiro;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.poem.config.logout.ShiroLogoutFilter;
 import org.poem.config.ralm.ShiroConfigRealm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,5 +62,13 @@ public class ShiroConfiguration {
     DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
     securityManager.setRealm(shiroConfigRealm());
     return securityManager;
+  }
+
+  /** @return */
+  @Bean
+  public ShiroLogoutFilter getShiroLogoutFilter() {
+    ShiroLogoutFilter shiroLogoutFilter = new ShiroLogoutFilter();
+    shiroLogoutFilter.setRedirectUrl("/logout");
+    return shiroLogoutFilter;
   }
 }
