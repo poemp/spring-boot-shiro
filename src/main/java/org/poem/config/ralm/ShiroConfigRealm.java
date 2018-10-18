@@ -67,7 +67,7 @@ public class ShiroConfigRealm extends AuthorizingRealm {
     // 获取用户的输入的账号.
     String username = (String) token.getPrincipal();
     logger.info("username=" + utoken.getUsername());
-    logger.info(("password=" + utoken.getPassword());
+    logger.info("password=" + utoken.getPassword());
     logger.info(token.getCredentials() + "");
 
 
