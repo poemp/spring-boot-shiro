@@ -6,6 +6,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +14,7 @@ import java.util.Map;
 
 /** @author poem */
 @RestController
-@RequestMapping("/userInfo")
+@RequestMapping(value = "/user")
 public class UserController {
 
   private static final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -23,7 +24,7 @@ public class UserController {
    * @return
    * @throws Exception
    */
-  @RequestMapping("/login")
+  @RequestMapping(value = "/login",method = RequestMethod.POST)
   public String login(HttpServletRequest request, Map<String, Object> map) throws Exception {
     logger.info("HomeController.login()");
     // 登录失败从request中获取shiro处理的异常信息。
