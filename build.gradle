@@ -1,0 +1,50 @@
+buildscript {
+    ext {
+        springBootVersion = '2.0.6.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'org.poem'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+
+repositories {
+    flatDir {
+        dirs "$rootProject.projectDir/libs"
+    }
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+    mavenCentral()
+    jcenter()
+    mavenLocal()
+}
+
+
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    compile group: 'org.apache.shiro', name: 'shiro-spring', version: '1.4.0'
+    compile("org.postgresql:postgresql:42.2.4")
+    compile("org.jooq:jooq:3.11.4")
+    compile("org.jooq:jooq-meta:3.11.4")
+    compile("org.jooq:jooq-codegen:3.11.4")
+    compile("org.springframework.boot:spring-boot-starter-web:2.0.6.RELEASE")
+    compile("org.springframework.boot:spring-boot-starter-jooq:2.0.6.RELEASE")
+    compile("org.springframework.boot:spring-boot-starter-logging:2.6.4.RELEASE")
+    compile group: 'org.flywaydb', name: 'flyway-maven-plugin', version: '3.0'
+}
