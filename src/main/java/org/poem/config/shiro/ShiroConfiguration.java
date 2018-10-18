@@ -5,12 +5,11 @@ import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
-import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.poem.config.credentials.CredentialsMatcher;
 import org.poem.config.filter.ShiroFormAuthenticationFilter;
+import org.poem.config.filter.ShiroLogoutFilter;
 import org.poem.config.ralm.ShiroConfigRealm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -139,8 +138,27 @@ public class ShiroConfiguration {
     return new CredentialsMatcher();
   }
 
+  /**
+   * 重复登陆
+   * @return
+   */
   @Bean
   public ShiroFormAuthenticationFilter getShiroFormAuthenticationFilter(){
+    ShiroFormAuthenticationFilter shiroFormAuthenticationFilter = new ShiroFormAuthenticationFilter();
+    shiroFormAuthenticationFilter.setUsernameParam("username");
+    shiroFormAuthenticationFilter.setPasswordParam("password");
     return new ShiroFormAuthenticationFilter();
   }
+
+
+//  /**
+//   * 登出 session 会出问题 所以先注视
+//   * @return
+//   */
+//  @Bean
+//  public ShiroLogoutFilter shiroLogoutFilter(){
+//    ShiroLogoutFilter shiroLogoutFilter = new ShiroLogoutFilter();
+//    shiroLogoutFilter.setRedirectUrl("/logout");
+//    return shiroLogoutFilter;
+//  }
 }

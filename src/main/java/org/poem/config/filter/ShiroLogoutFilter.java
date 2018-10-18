@@ -1,4 +1,4 @@
-package org.poem.config.logout;
+package org.poem.config.filter;
 
 import org.apache.shiro.session.SessionException;
 import org.apache.shiro.subject.Subject;
@@ -12,7 +12,6 @@ import javax.servlet.ServletResponse;
  * 登出
  */
 public class ShiroLogoutFilter extends LogoutFilter {
-
 
     /**
      *
