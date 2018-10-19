@@ -3,5 +3,5 @@
  登陆接口：
  
     
-    /login?username=admin&password=123456
+    /nuauth?username=admin&password=123456
     

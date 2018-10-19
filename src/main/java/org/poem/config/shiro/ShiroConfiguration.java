@@ -4,6 +4,7 @@ import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
@@ -45,7 +46,7 @@ public class ShiroConfiguration {
     // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
     filterChainDefinitionMap.put("/**", "authc");
     // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
-    shiroFilterFactoryBean.setLoginUrl("/login");
+    shiroFilterFactoryBean.setLoginUrl("/unauth");
     // 登录成功后要跳转的链接
     shiroFilterFactoryBean.setSuccessUrl("/index");
 
@@ -55,12 +56,14 @@ public class ShiroConfiguration {
     return shiroFilterFactoryBean;
   }
 
+
   /**
    * 配置自定义的权限登录器
    * @return
    */
   @Bean
   public ShiroConfigRealm shiroConfigRealm() {
+    logger.info("配置自定义的权限登录器: shiroConfigRealm()");
     ShiroConfigRealm shiroConfigRealm = new ShiroConfigRealm();
     shiroConfigRealm.setCredentialsMatcher(credentialsMatcher());
     return shiroConfigRealm;
@@ -73,10 +76,11 @@ public class ShiroConfiguration {
   @Bean
   public SecurityManager securityManager() {
     DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+    logger.info("配置核心安全事务管理器: securityManager()");
     securityManager.setRealm(shiroConfigRealm());
     securityManager.setSessionManager(sessionManager());
     // <!-- 用户授权/认证信息Cache, 采用EhCache 缓存 -->
-    securityManager.setCacheManager(ehCacheManager());
+//    securityManager.setCacheManager(ehCacheManager());
     return securityManager;
   }
 
@@ -149,15 +153,10 @@ public class ShiroConfiguration {
     return new ShiroFormAuthenticationFilter();
   }
 
-
-//  /**
-//   * 登出 session 会出问题 所以先注视
-//   * @return
-//   */
-//  @Bean
-//  public ShiroLogoutFilter shiroLogoutFilter(){
-//    ShiroLogoutFilter shiroLogoutFilter = new ShiroLogoutFilter();
-//    shiroLogoutFilter.setRedirectUrl("/logout");
-//    return shiroLogoutFilter;
-//  }
+  @Bean
+  public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
+    AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+    authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+    return authorizationAttributeSourceAdvisor;
+  }
 }

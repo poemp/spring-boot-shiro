@@ -37,7 +37,7 @@ public class DefaultCatalog extends CatalogImpl {
     /**
      * The schema <code>public</code>.
      */
-    public final Public PUBLIC = org.poem.jooq.Public.PUBLIC;
+    public final Public PUBLIC = Public.PUBLIC;
 
     /**
      * No further instances allowed

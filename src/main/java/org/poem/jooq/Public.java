@@ -43,27 +43,27 @@ public class Public extends SchemaImpl {
     /**
      * The table <code>public.t_sys_permission</code>.
      */
-    public final TSysPermission T_SYS_PERMISSION = org.poem.jooq.tables.TSysPermission.T_SYS_PERMISSION;
+    public final TSysPermission T_SYS_PERMISSION = TSysPermission.T_SYS_PERMISSION;
 
     /**
      * The table <code>public.t_sys_role</code>.
      */
-    public final TSysRole T_SYS_ROLE = org.poem.jooq.tables.TSysRole.T_SYS_ROLE;
+    public final TSysRole T_SYS_ROLE = TSysRole.T_SYS_ROLE;
 
     /**
      * The table <code>public.t_sys_role_permission</code>.
      */
-    public final TSysRolePermission T_SYS_ROLE_PERMISSION = org.poem.jooq.tables.TSysRolePermission.T_SYS_ROLE_PERMISSION;
+    public final TSysRolePermission T_SYS_ROLE_PERMISSION = TSysRolePermission.T_SYS_ROLE_PERMISSION;
 
     /**
      * The table <code>public.t_sys_user_role</code>.
      */
-    public final TSysUserRole T_SYS_USER_ROLE = org.poem.jooq.tables.TSysUserRole.T_SYS_USER_ROLE;
+    public final TSysUserRole T_SYS_USER_ROLE = TSysUserRole.T_SYS_USER_ROLE;
 
     /**
      * The table <code>public.t_user_info</code>.
      */
-    public final TUserInfo T_USER_INFO = org.poem.jooq.tables.TUserInfo.T_USER_INFO;
+    public final TUserInfo T_USER_INFO = TUserInfo.T_USER_INFO;
 
     /**
      * No further instances allowed

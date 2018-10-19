@@ -29,25 +29,25 @@ public class Tables {
     /**
      * The table <code>public.t_sys_permission</code>.
      */
-    public static final TSysPermission T_SYS_PERMISSION = org.poem.jooq.tables.TSysPermission.T_SYS_PERMISSION;
+    public static final TSysPermission T_SYS_PERMISSION = TSysPermission.T_SYS_PERMISSION;
 
     /**
      * The table <code>public.t_sys_role</code>.
      */
-    public static final TSysRole T_SYS_ROLE = org.poem.jooq.tables.TSysRole.T_SYS_ROLE;
+    public static final TSysRole T_SYS_ROLE = TSysRole.T_SYS_ROLE;
 
     /**
      * The table <code>public.t_sys_role_permission</code>.
      */
-    public static final TSysRolePermission T_SYS_ROLE_PERMISSION = org.poem.jooq.tables.TSysRolePermission.T_SYS_ROLE_PERMISSION;
+    public static final TSysRolePermission T_SYS_ROLE_PERMISSION = TSysRolePermission.T_SYS_ROLE_PERMISSION;
 
     /**
      * The table <code>public.t_sys_user_role</code>.
      */
-    public static final TSysUserRole T_SYS_USER_ROLE = org.poem.jooq.tables.TSysUserRole.T_SYS_USER_ROLE;
+    public static final TSysUserRole T_SYS_USER_ROLE = TSysUserRole.T_SYS_USER_ROLE;
 
     /**
      * The table <code>public.t_user_info</code>.
      */
-    public static final TUserInfo T_USER_INFO = org.poem.jooq.tables.TUserInfo.T_USER_INFO;
+    public static final TUserInfo T_USER_INFO = TUserInfo.T_USER_INFO;
 }

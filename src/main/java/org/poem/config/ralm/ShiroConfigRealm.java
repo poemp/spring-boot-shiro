@@ -24,7 +24,8 @@ import java.util.List;
 /** @author poem */
 public class ShiroConfigRealm extends AuthorizingRealm {
 
-  @Autowired private UserInfoService userInfoService;
+  @Autowired
+  private UserInfoService userInfoService;
   /** */
   private static final Logger logger = LoggerFactory.getLogger(ShiroConfigRealm.class);
   /**
