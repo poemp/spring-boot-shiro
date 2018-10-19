@@ -59,9 +59,6 @@ public class LoginController {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         subject.login(token);
-//        Map<String, Object> map = new HashMap<String, Object>();
-//        map.put("code", "1000000");
-//        map.put("msg", "未登录");
         return "login success";
     }
 
