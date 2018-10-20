@@ -1,5 +1,6 @@
 package org.poem.config.ralm;
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -62,22 +63,19 @@ public class ShiroConfigRealm extends AuthorizingRealm {
    * @throws AuthenticationException
    */
   @Override
-  protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token)
-      throws AuthenticationException {
+  protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
     logger.info("ShiroConfigRealm.doGetAuthenticationInfo()");
     // 获取用户输入的token
     UsernamePasswordToken utoken = (UsernamePasswordToken) token;
     // 获取用户的输入的账号.
     String username = (String) token.getPrincipal();
     logger.info("username=" + utoken.getUsername());
-    logger.info("password=" + utoken.getPassword());
-    logger.info(token.getCredentials() + "");
+    logger.info("password=" + String.valueOf(utoken.getPassword()));
+    logger.info("token.getCredentials():" + JSONObject.toJSON(token.getCredentials()));
 
     // 处理session
-    SessionsSecurityManager securityManager =
-        (SessionsSecurityManager) SecurityUtils.getSecurityManager();
-    DefaultSessionManager sessionManager =
-        (DefaultSessionManager) securityManager.getSessionManager();
+    SessionsSecurityManager securityManager = (SessionsSecurityManager) SecurityUtils.getSecurityManager();
+    DefaultSessionManager sessionManager = (DefaultSessionManager) securityManager.getSessionManager();
     // 获取当前已登录的用户session列表
     Collection<Session> sessions = sessionManager.getSessionDAO().getActiveSessions();
     for (Session session : sessions) {
@@ -100,7 +98,11 @@ public class ShiroConfigRealm extends AuthorizingRealm {
     UserInfoVO userInfoVO = userInfoService.findByUsername(username);
     logger.info("----->>userInfoVO=" + userInfoVO);
     if (userInfoVO == null) {
-      return null;
+       return null;
+    }
+    //锁住了
+    if(userInfoVO.getLocked() != null && userInfoVO.getLocked()){
+      throw new LockedAccountException("locked this account");
     }
     SimpleAuthenticationInfo authenticationInfo =
         new SimpleAuthenticationInfo(

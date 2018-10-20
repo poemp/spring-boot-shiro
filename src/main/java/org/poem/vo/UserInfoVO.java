@@ -20,8 +20,20 @@ public class UserInfoVO {
   /** 用户状态,0:创建未认证（比如没有激活，没有输入验证码等等） */
   private String state;
 
+  /**
+   * 是否锁住
+   */
+  private Boolean locked;
+
   private List<SysRoleVO> sysRoles;
 
+  public Boolean getLocked() {
+    return locked;
+  }
+
+  public void setLocked(Boolean locked) {
+    this.locked = locked;
+  }
 
   public List<SysRoleVO> getSysRoles() {
     return sysRoles;

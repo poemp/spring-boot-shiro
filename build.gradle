@@ -38,6 +38,7 @@ dependencies {
     compile("org.jooq:jooq:3.11.4")
     compile("org.jooq:jooq-meta:3.11.4")
     compile("org.jooq:jooq-codegen:3.11.4")
+    compile("com.alibaba:fastjson:1.2.49")
     compile("org.springframework.boot:spring-boot-starter-web:2.0.6.RELEASE")
     compile("org.springframework.boot:spring-boot-starter-jooq:2.0.6.RELEASE")
     compile("org.springframework.boot:spring-boot-starter-logging:2.6.4.RELEASE")
