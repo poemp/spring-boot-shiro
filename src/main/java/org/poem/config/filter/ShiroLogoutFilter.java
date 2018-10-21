@@ -10,6 +10,7 @@ import javax.servlet.ServletResponse;
 
 /**
  * 登出
+ * @author poem
  */
 public class ShiroLogoutFilter extends LogoutFilter {
 

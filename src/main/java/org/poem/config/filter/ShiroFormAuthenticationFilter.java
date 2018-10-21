@@ -16,9 +16,16 @@ import javax.servlet.ServletResponse;
 public class ShiroFormAuthenticationFilter extends FormAuthenticationFilter {
 
     private static final Logger logger = LoggerFactory.getLogger(ShiroFormAuthenticationFilter.class);
+
+  /**
+   *
+   * @param request
+   * @param response
+   * @param mappedValue
+   * @return
+   */
   @Override
-  protected boolean isAccessAllowed(
-      ServletRequest request, ServletResponse response, Object mappedValue) {
+  protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
     if (isLoginRequest(request, response)) {
       if (isLoginSubmission(request, response)) {
         // 本次用户登陆账号

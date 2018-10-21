@@ -39,8 +39,7 @@ public class ShiroConfigRealm extends AuthorizingRealm {
   protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
     logger.info("权限配置-->ShiroConfigRealm.doGetAuthorizationInfo()");
     // 获取session中的用户
-    UserInfoVO user =
-        (UserInfoVO) principals.fromRealm(this.getClass().getName()).iterator().next();
+    UserInfoVO user = (UserInfoVO) principals.fromRealm(this.getClass().getName()).iterator().next();
     List<SysRoleVO> roleid = user.getSysRoles();
     logger.info("roleid=" + roleid);
 
@@ -97,6 +96,7 @@ public class ShiroConfigRealm extends AuthorizingRealm {
     // 实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
     UserInfoVO userInfoVO = userInfoService.findByUsername(username);
     logger.info("----->>userInfoVO=" + userInfoVO);
+    //会抛出账号不存在的异常
     if (userInfoVO == null) {
        return null;
     }
@@ -111,6 +111,7 @@ public class ShiroConfigRealm extends AuthorizingRealm {
             ByteSource.Util.bytes(userInfoVO.getCredentialsSalt()),
             getName());
     // 放入shiro.调用CredentialsMatcher检验密码
+    //会抛出密码错误
     return authenticationInfo;
   }
 }
