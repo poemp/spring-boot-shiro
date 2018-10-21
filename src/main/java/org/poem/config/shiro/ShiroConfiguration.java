@@ -10,6 +10,7 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.poem.config.credentials.CredentialsMatcher;
 import org.poem.config.filter.ShiroFormAuthenticationFilter;
+import org.poem.config.filter.ShiroLogoutFilter;
 import org.poem.config.ralm.ShiroConfigRealm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
+import javax.servlet.Filter;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -47,17 +50,20 @@ public class ShiroConfiguration {
     // <!-- 过滤链定义，从上向下顺序执行，一般将/**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
     // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
     filterChainDefinitionMap.put("/v1/**", "authc");
-
     filterChainDefinitionMap.put("/reLogin","anon");
 
-    shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
+    shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
     // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
     shiroFilterFactoryBean.setLoginUrl("/unauth");
     // 登录成功后要跳转的链接
     shiroFilterFactoryBean.setSuccessUrl("/index");
     // 未授权界面;
     shiroFilterFactoryBean.setUnauthorizedUrl("/reLogin");
+
+    Map<String, Filter> filters = new HashMap<>();
+    filters.put("logout", new ShiroLogoutFilter());
+    shiroFilterFactoryBean.setFilters(filters);
 
     return shiroFilterFactoryBean;
   }

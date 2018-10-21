@@ -24,8 +24,9 @@ public class ShiroLogoutFilter extends LogoutFilter {
     @Override
     protected boolean preHandle(ServletRequest request, ServletResponse response) throws Exception {
         //在这里执行退出系统前需要清空的数据
-        Subject subject=getSubject(request,response);
-        String redirectUrl=getRedirectUrl(request,response,subject);
+        Subject subject= getSubject(request,response);
+//        String redirectUrl=getRedirectUrl(request,response,subject);
+        String redirectUrl = "/logoutSuccess";
         ServletContext context= request.getServletContext();
         try {
             subject.logout();

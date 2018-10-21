@@ -71,4 +71,25 @@ public class LoginController {
     return new ResultVO<>(0, userInfoVO, "login success");
   }
 
+
+  /**
+   * 登出
+   * @return
+   */
+  @RequestMapping(value = "/logoutSuccess")
+  public ResultVO<String> logout(){
+    return new ResultVO<>(0, null, "logout success");
+  }
+
+
+
+  /**
+   * 登出
+   * @return
+   */
+  @RequestMapping(value = "/resLogout")
+  public ResultVO<String> resLogout(){
+    return new ResultVO<>(999, null, "resLogout success");
+  }
+
 }
