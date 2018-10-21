@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /** @author poem */
 @RestController
-@RequestMapping
+@RequestMapping("/v1/")
 public class IndexController {
 
   private static final Logger logger = LoggerFactory.getLogger(IndexController.class);

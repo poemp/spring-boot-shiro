@@ -1,15 +1,19 @@
 package org.poem.controller;
 
+import com.jcraft.jsch.UserInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.pam.UnsupportedTokenException;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.jooq.Result;
 import org.poem.vo.UserInfoVO;
 import org.poem.vo.result.ResultVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +34,9 @@ public class LoginController {
    */
   @RequestMapping(value = "/unauth")
   public ResultVO<UserInfoVO> unauth(String username, String password) {
+    if (StringUtils.isEmpty(username) && StringUtils.isEmpty(password)){
+      return new ResultVO<>(-1, null,"重新登陆。");
+    }
     Subject subject = SecurityUtils.getSubject();
     UsernamePasswordToken token = new UsernamePasswordToken(username, password);
     try {
@@ -63,4 +70,5 @@ public class LoginController {
     UserInfoVO userInfoVO = (UserInfoVO) SecurityUtils.getSubject().getPrincipal();
     return new ResultVO<>(0, userInfoVO, "login success");
   }
+
 }

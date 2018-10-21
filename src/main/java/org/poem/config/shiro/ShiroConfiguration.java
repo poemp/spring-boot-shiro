@@ -16,9 +16,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Properties;
 
 /** @author poem */
 @Configuration
@@ -44,16 +46,35 @@ public class ShiroConfiguration {
     filterChainDefinitionMap.put("/logout", "logout");
     // <!-- 过滤链定义，从上向下顺序执行，一般将/**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
     // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
-    filterChainDefinitionMap.put("/**", "authc");
+    filterChainDefinitionMap.put("/v1/**", "authc");
+
+    filterChainDefinitionMap.put("/reLogin","anon");
+
+    shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+
     // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
     shiroFilterFactoryBean.setLoginUrl("/unauth");
     // 登录成功后要跳转的链接
     shiroFilterFactoryBean.setSuccessUrl("/index");
-
     // 未授权界面;
-    shiroFilterFactoryBean.setUnauthorizedUrl("/403");
-    shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+    shiroFilterFactoryBean.setUnauthorizedUrl("/reLogin");
+
     return shiroFilterFactoryBean;
+  }
+
+
+  /**
+   * 访问没有权限的页面的处理
+   * UnauthorizedUrl 无效果
+   * @return
+   */
+  @Bean
+  public SimpleMappingExceptionResolver simpleMappingExceptionResolver(){
+    SimpleMappingExceptionResolver s  = new SimpleMappingExceptionResolver();
+    Properties properties = new Properties();
+    properties.setProperty("org.apache.shiro.authz.UnauthorizedException","/reLogin");
+    s.setExceptionMappings(properties);
+    return s;
   }
 
 
