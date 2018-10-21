@@ -3,5 +3,4 @@
  登陆接口：
  
     
-    /nuauth?username=admin&password=123456
-    
+    http://127.0.0.1:8080/unauth?username=dmin&password=123456    
