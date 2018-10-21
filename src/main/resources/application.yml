@@ -10,3 +10,7 @@ spring:
     password: 123456
   jooq:
     sql-dialect: POSTGRES
+
+logging:
+  level:
+    root: debug
