@@ -33,6 +33,28 @@ public class ShiroConfiguration {
   private static final Logger logger = LoggerFactory.getLogger(ShiroConfiguration.class);
 
   /**
+   * / 通用过滤器，任何请求允许访问
+   * anon(AnonymousFilter.class),
+   * // 表单认证过滤器
+   * authc(FormAuthenticationFilter.class),
+   * // 基于Http请求的认证过滤器
+   * authcBasic(BasicHttpAuthenticationFilter.class),
+   * // 登出过滤器
+   * logout(LogoutFilter.class),
+   * // 不创建Session过滤器
+   * noSessionCreation(NoSessionCreationFilter.class),
+   * // 权限认证过滤器
+   * perms(PermissionsAuthorizationFilter.class),
+   * // 端口过滤器
+   * port(PortFilter.class),
+   * //请求处理为权限的一种过滤器
+   * rest(HttpMethodPermissionFilter.class),
+   * // 角色过滤器
+   * roles(RolesAuthorizationFilter.class),
+   * // SSL过滤器 ssl(SslFilter.class),
+   * // 用户过滤器，检测用户是否登录
+   * user(UserFilter.class);
+   *
    * @param securityManager
    * @return
    */
@@ -49,7 +71,7 @@ public class ShiroConfiguration {
     filterChainDefinitionMap.put("/logout", "logout");
     // <!-- 过滤链定义，从上向下顺序执行，一般将/**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
     // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
-    filterChainDefinitionMap.put("/v1/**", "authc");
+    filterChainDefinitionMap.put("/v1/**", "perms");
     filterChainDefinitionMap.put("/reLogin","anon");
 
 

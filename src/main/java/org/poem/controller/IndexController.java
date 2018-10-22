@@ -16,7 +16,7 @@ public class IndexController {
   @RequestMapping("/index")
   @ResponseBody
   public String index() {
-    logger.info("login Success.");
-    return "login success";
+    logger.info("index index.");
+    return "index index";
   }
 }

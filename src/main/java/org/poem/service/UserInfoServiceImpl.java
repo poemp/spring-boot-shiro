@@ -45,7 +45,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     userInfoVO.setPassword(tUserInfoRecord.getPassword());
     userInfoVO.setSalt(tUserInfoRecord.getSalt());
     userInfoVO.setState(tUserInfoRecord.getState());
-    userInfoVO.setLocked(true);
+    userInfoVO.setLocked("1".equals(tUserInfoRecord.getState()));
     userInfoVO.setSysRoles(sysRoles(tUserInfoRecord.getId()));
     return userInfoVO;
   }
