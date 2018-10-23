@@ -1,0 +1,16 @@
+spring:
+  flyway:
+      locations: classpath:/db_migrations/
+      enabled: true
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://127.0.0.1:5432/vs_shiro?searchpath=public
+    username: postgres
+    password: 123456
+  jooq:
+    sql-dialect: POSTGRES
+
+logging:
+  level:
+    root: debug

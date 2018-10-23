@@ -4,7 +4,8 @@ package org.poem.base.impl;
 import org.jooq.*;
 import org.jooq.exception.DataAccessException;
 import org.jooq.impl.DSL;
-import org.poem.dao.base.BaseDao;
+import org.poem.base.BaseDao;
+
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;

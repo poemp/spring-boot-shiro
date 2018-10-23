@@ -4,4 +4,5 @@ apply plugin: 'java'
 
 dependencies {
     compile( project(":vs-vo"))
+    compile( project(":vs-api"))
 }

@@ -11,7 +11,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.DefaultSessionManager;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
-import org.poem.api.UserInfoService;
+import org.poem.user.UserInfoService;
 import org.poem.vo.SysPermissionVO;
 import org.poem.vo.SysRoleVO;
 import org.poem.vo.UserInfoVO;

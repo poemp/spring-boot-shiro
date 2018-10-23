@@ -1,13 +1,14 @@
 package org.poem.user;
 
 import org.jooq.Record;
-import org.poem.api.UserInfoService;
-import org.poem.dao.permission.SysPermissionDao;
-import org.poem.dao.role.SysRoleDao;
-import org.poem.dao.user.UserDao;
 import org.poem.jooq.tables.TSysPermission;
 import org.poem.jooq.tables.TSysRole;
 import org.poem.jooq.tables.records.TUserInfoRecord;
+import org.poem.permission.SysPermissionDao;
+import org.poem.role.SysRoleDao;
+import org.poem.vo.SysPermissionVO;
+import org.poem.vo.SysRoleVO;
+import org.poem.vo.UserInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

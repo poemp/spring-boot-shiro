@@ -1,3 +1,4 @@
+apply from : '../build.gradle'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
