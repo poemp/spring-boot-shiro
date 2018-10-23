@@ -1,19 +1,9 @@
-plugins {
-    id 'java'
-}
 
-group 'org.poem'
-version '0.0.1-SNAPSHOT'
-
-sourceCompatibility = 1.8
-
-repositories {
-    mavenCentral()
-}
+apply from : '../build.gradle'
+apply plugin: 'java'
 
 dependencies {
-    compile( project(":vs-vo") )
+    compile( project(":vs-entity") )
     compile( project(":vs-common") )
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-
+    compile( project(":vs-vo"))
 }

@@ -54,4 +54,13 @@ public class ResultVO<T> {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    @Override
+    public String toString() {
+        return "ResultVO{" +
+                "status=" + status +
+                ", data=" + data +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }
