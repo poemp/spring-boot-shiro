@@ -1,4 +1,4 @@
-package org.poem;
+package org.poem.vo;
 
 /** @author poem */
 public class SysPermissionVO {

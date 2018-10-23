@@ -5,7 +5,6 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.pam.UnsupportedTokenException;
 import org.apache.shiro.subject.Subject;
-import org.poem.UserInfoVO;
 import org.poem.vo.UserInfoVO;
 import org.poem.result.ResultVO;
 import org.slf4j.Logger;

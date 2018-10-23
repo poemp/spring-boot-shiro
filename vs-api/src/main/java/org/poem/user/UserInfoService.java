@@ -1,7 +1,7 @@
 package org.poem.user;
 
 
-import org.poem.UserInfoVO;
+import org.poem.vo.UserInfoVO;
 
 /**
  * @author poem
