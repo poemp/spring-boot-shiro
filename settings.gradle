@@ -1,1 +1,8 @@
 rootProject.name = 'spring-boot-shiro'
+include 'vs-common'
+include 'vs-dao'
+include 'vs-service'
+include 'vs-api'
+include 'vs-controller'
+include 'vs-entity'
+include 'vs-vo'
