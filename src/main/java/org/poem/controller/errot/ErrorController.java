@@ -15,6 +15,15 @@ public class ErrorController implements org.springframework.boot.web.servlet.err
 
     /**
      *
+     * @return
+     */
+    @Override
+    public String getErrorPath() {
+        return "/error";
+    }
+
+    /**
+     * 错误了
      * @param request
      * @return
      */
@@ -31,10 +40,5 @@ public class ErrorController implements org.springframework.boot.web.servlet.err
         }else{
             return new ResultVO<>(500,"服务器错误","");
         }
-
-    }
-    @Override
-    public String getErrorPath() {
-        return "/error";
     }
 }
