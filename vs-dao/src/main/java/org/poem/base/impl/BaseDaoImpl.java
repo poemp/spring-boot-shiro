@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Optional;
 
 
+/**
+ * @author poem
+ */
 public abstract class BaseDaoImpl<R extends UpdatableRecord<R>, ID extends Number> implements BaseDao<R, ID> {
 
     private Table<R> table;
@@ -23,6 +26,10 @@ public abstract class BaseDaoImpl<R extends UpdatableRecord<R>, ID extends Numbe
         this.table = table;
     }
 
+    /**
+     * 获取配置
+     * @return
+     */
     @PostConstruct
     public abstract Configuration getConfiguration();
 
