@@ -1,10 +1,18 @@
 package org.poem.user;
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.poem.RequestUtil;
+import org.poem.result.ResultVO;
+import org.poem.vo.UserInfoVO;
+import org.poem.vo.login.LoginSuccessVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /** @author poem */
 @RestController
@@ -21,8 +29,12 @@ public class UserController {
    */
   @RequestMapping("/userList")
   @RequiresPermissions("userInfo:view") // 权限管理;
-  public String userInfo() {
-    return "userInfo";
+  public ResultVO<LoginSuccessVo> userInfo(HttpServletRequest request) {
+    LoginSuccessVo loginSuccessVo = RequestUtil.getLoginSuccessVo(request);
+    if(loginSuccessVo != null){
+      loginSuccessVo.setUserInfoVO(JSONObject.parseObject(loginSuccessVo.getAuthorization(), UserInfoVO.class));
+    }
+    return new ResultVO<>(0,loginSuccessVo);
   }
 
   /**

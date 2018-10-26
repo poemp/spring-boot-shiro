@@ -8,7 +8,6 @@ import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSource
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
-import org.poem.filter.ShiroFormAuthenticationFilter;
 import org.poem.filter.ShiroLogoutFilter;
 import org.poem.filter.ShiroOauthFilter;
 import org.poem.ralm.ShiroConfigRealm;
@@ -72,16 +71,7 @@ public class ShiroConfiguration {
     // <!-- 过滤链定义，从上向下顺序执行，一般将/**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
     // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
     filterChainDefinitionMap.put("/v1/**", "oauth");
-    filterChainDefinitionMap.put("/reLogin","anon");
-
-
     shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
-    // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
-    shiroFilterFactoryBean.setLoginUrl("/unauth");
-    // 登录成功后要跳转的链接
-    shiroFilterFactoryBean.setSuccessUrl("/loginSuccess");
-    // 未授权界面;
-    shiroFilterFactoryBean.setUnauthorizedUrl("/reLogin");
 
     Map<String, Filter> filters = new HashMap<>(1);
     filters.put("logout", new ShiroLogoutFilter());
@@ -123,7 +113,6 @@ public class ShiroConfiguration {
   public ShiroConfigRealm shiroConfigRealm() {
     logger.info("配置自定义的权限登录器: shiroConfigRealm()");
     ShiroConfigRealm shiroConfigRealm = new ShiroConfigRealm();
-//    shiroConfigRealm.setCredentialsMatcher(credentialsMatcher());
     return shiroConfigRealm;
   }
 
@@ -137,8 +126,6 @@ public class ShiroConfiguration {
     logger.info("配置核心安全事务管理器: securityManager()");
     securityManager.setRealm(shiroConfigRealm());
     securityManager.setSessionManager(sessionManager());
-    // <!-- 用户授权/认证信息Cache, 采用EhCache 缓存 -->
-//    securityManager.setCacheManager(ehCacheManager());
     return securityManager;
   }
 
@@ -187,29 +174,6 @@ public class ShiroConfiguration {
     return sessionManager;
   }
 
-
-//  /**
-//   * 自定义密码比较器
-//   *
-//   * @return
-//   */
-//  @Bean
-//  public CredentialsMatcher credentialsMatcher() {
-//    logger.info("credentialsMatcher");
-//    return new CredentialsMatcher();
-//  }
-
-  /**
-   * 重复登陆
-   * @return
-   */
-  @Bean
-  public ShiroFormAuthenticationFilter getShiroFormAuthenticationFilter(){
-    ShiroFormAuthenticationFilter shiroFormAuthenticationFilter = new ShiroFormAuthenticationFilter();
-    shiroFormAuthenticationFilter.setUsernameParam("username");
-    shiroFormAuthenticationFilter.setPasswordParam("password");
-    return new ShiroFormAuthenticationFilter();
-  }
 
   @Bean
   public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {

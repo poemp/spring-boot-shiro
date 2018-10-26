@@ -79,12 +79,11 @@ public class ShiroConfigRealm extends AuthorizingRealm {
   @Override
   protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 
-    OAuthToken oAuthToken = (OAuthToken) token;
-    String tokenss = (String) oAuthToken.getCredentials();
+    String accessToken = (String) token.getPrincipal();
 
     UserInfoVO userInfoVO = null;
     try {
-      Map<String, Object> map = JwtHelper.extractInfo(tokenss);
+      Map<String, Object> map = JwtHelper.extractInfo(accessToken);
       if (map == null){
         throw new AuthenticationException();
       }
@@ -102,14 +101,9 @@ public class ShiroConfigRealm extends AuthorizingRealm {
     if (userInfoVO.getLocked() != null && userInfoVO.getLocked()) {
       throw new LockedAccountException("locked this account");
     }
-    SimpleAuthenticationInfo authenticationInfo =
-            new SimpleAuthenticationInfo(
-                    userInfoVO,
-                    userInfoVO.getPassword(),
-                    ByteSource.Util.bytes(userInfoVO.getCredentialsSalt()),
-                    getName());
+    SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userInfoVO, accessToken, getName());
     // 放入shiro.调用CredentialsMatcher检验密码
     //会抛出密码错误
-    return authenticationInfo;
+    return info;
   }
 }
