@@ -32,7 +32,7 @@ repositories {
 
 dependencies {
     implementation('org.springframework.boot:spring-boot-starter'){
-        exclude module: "spring-boot-starter-logginh"
+        exclude module: "spring-boot-starter-logging"
     }
     testImplementation('org.springframework.boot:spring-boot-starter-test'){
         exclude group:"commons-logging"
@@ -44,6 +44,7 @@ dependencies {
     compile("org.jooq:jooq-meta:3.11.4")
     compile("org.jooq:jooq-codegen:3.11.4")
     compile("com.alibaba:fastjson:1.2.49")
+    compile("io.jsonwebtoken:jjwt:0.7.0")
     compile("org.springframework.boot:spring-boot-starter-web:2.0.6.RELEASE")
     compile("org.springframework.boot:spring-boot-starter-jooq:2.0.6.RELEASE")
     compile("org.springframework.boot:spring-boot-starter-logging:2.6.4.RELEASE")

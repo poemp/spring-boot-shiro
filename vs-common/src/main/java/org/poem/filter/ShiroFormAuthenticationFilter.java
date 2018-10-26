@@ -25,12 +25,11 @@ public class ShiroFormAuthenticationFilter extends FormAuthenticationFilter {
    * @return
    */
   @Override
-  protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
+  public boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
     if (isLoginRequest(request, response)) {
       if (isLoginSubmission(request, response)) {
         // 本次用户登陆账号
         String account = this.getUsername(request);
-
         Subject subject = this.getSubject(request, response);
         // 之前登陆的用户
         UserInfoVO user = (UserInfoVO) subject.getPrincipal();

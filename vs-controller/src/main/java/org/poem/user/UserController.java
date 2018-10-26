@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /** @author poem */
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/v1/user")
 public class UserController {
 
   private static final Logger logger = LoggerFactory.getLogger(UserController.class);

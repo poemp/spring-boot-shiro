@@ -5,6 +5,8 @@ import java.util.List;
 /** @author poem */
 public class UserInfoVO {
 
+  private Long userId;
+
   /** 用户名称 */
   private String name;
 
@@ -26,6 +28,14 @@ public class UserInfoVO {
   private Boolean locked;
 
   private List<SysRoleVO> sysRoles;
+
+  public Long getUserId() {
+    return userId;
+  }
+
+  public void setUserId(Long userId) {
+    this.userId = userId;
+  }
 
   public Boolean getLocked() {
     return locked;

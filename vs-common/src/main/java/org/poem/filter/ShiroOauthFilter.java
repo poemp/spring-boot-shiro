@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.web.filter.authc.AuthenticatingFilter;
+import org.poem.RequestUtil;
 import org.poem.filter.token.OAuthToken;
 import org.poem.result.ResultVO;
 import org.slf4j.Logger;
@@ -25,19 +26,7 @@ public class ShiroOauthFilter extends AuthenticatingFilter {
 
     private static final Logger logger = LoggerFactory.getLogger(ShiroOauthFilter.class);
 
-    /**
-     * 获取请求的token
-     */
-    private String getRequestToken(HttpServletRequest httpRequest){
-        //从header中获取token
-        String token = httpRequest.getHeader("Authorization");
 
-        //如果header中不存在token，则从参数中获取token
-        if(StringUtils.isBlank(token)){
-            token = httpRequest.getParameter("Authorization");
-        }
-        return token;
-    }
 
     /**
      * 创建token
@@ -49,7 +38,7 @@ public class ShiroOauthFilter extends AuthenticatingFilter {
     @Override
     protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) throws Exception {
         //获取请求token
-        String token = getRequestToken((HttpServletRequest) request);
+        String token = RequestUtil.getAuthorization((HttpServletRequest) request);
 
         if(StringUtils.isBlank(token)){
             return null;
@@ -67,7 +56,7 @@ public class ShiroOauthFilter extends AuthenticatingFilter {
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
         //获取请求token，如果token不存在，直接返回401
-        String token = getRequestToken((HttpServletRequest) request);
+        String token = RequestUtil.getAuthorization((HttpServletRequest) request);
         if(StringUtils.isBlank(token)){
             HttpServletResponse httpResponse = (HttpServletResponse) response;
             httpResponse.setContentType("application/json;charset=utf-8");
@@ -83,6 +72,14 @@ public class ShiroOauthFilter extends AuthenticatingFilter {
         return executeLogin(request, response);
     }
 
+    /**
+     * 登陆失败
+     * @param token
+     * @param e
+     * @param request
+     * @param response
+     * @return
+     */
     @Override
     protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException e, ServletRequest request, ServletResponse response) {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
@@ -102,5 +99,23 @@ public class ShiroOauthFilter extends AuthenticatingFilter {
         }
 
         return false;
+    }
+
+    /**
+     * 拦截请求
+     * @param request
+     * @param response
+     * @param mappedValue
+     * @return
+     */
+    @Override
+    public boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
+        //获取请求token，如果token不存在，直接返回401
+        String token = RequestUtil.getAuthorization((HttpServletRequest) request);
+        if(StringUtils.isBlank(token)){
+            return false;
+        }
+        return super.isAccessAllowed(request, response, mappedValue) ||
+                (!isLoginRequest(request, response) && isPermissive(mappedValue));
     }
 }
