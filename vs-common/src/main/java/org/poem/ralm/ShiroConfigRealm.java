@@ -11,6 +11,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.DefaultSessionManager;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+import org.poem.filter.token.OAuthToken;
 import org.poem.user.UserInfoService;
 import org.poem.vo.SysPermissionVO;
 import org.poem.vo.SysRoleVO;
@@ -29,6 +30,18 @@ public class ShiroConfigRealm extends AuthorizingRealm {
   private UserInfoService userInfoService;
   /** */
   private static final Logger logger = LoggerFactory.getLogger(ShiroConfigRealm.class);
+
+
+  /**
+   * 是否支持
+   * @param token
+   * @return
+   */
+  @Override
+  public boolean supports(AuthenticationToken token) {
+    return token instanceof AuthenticationToken;
+  }
+
   /**
    * 认证.登录
    *

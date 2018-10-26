@@ -11,6 +11,7 @@ import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.poem.credentials.CredentialsMatcher;
 import org.poem.filter.ShiroFormAuthenticationFilter;
 import org.poem.filter.ShiroLogoutFilter;
+import org.poem.filter.ShiroOauthFilter;
 import org.poem.ralm.ShiroConfigRealm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,7 +72,7 @@ public class ShiroConfiguration {
     filterChainDefinitionMap.put("/logout", "logout");
     // <!-- 过滤链定义，从上向下顺序执行，一般将/**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
     // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
-    filterChainDefinitionMap.put("/v1/**", "perms");
+    filterChainDefinitionMap.put("/v1/**", "oauth");
     filterChainDefinitionMap.put("/reLogin","anon");
 
 
@@ -85,11 +86,20 @@ public class ShiroConfiguration {
 
     Map<String, Filter> filters = new HashMap<>(1);
     filters.put("logout", new ShiroLogoutFilter());
+    filters.put("oauth",getShiroOAuth2Filter());
     shiroFilterFactoryBean.setFilters(filters);
 
     return shiroFilterFactoryBean;
   }
 
+  /**
+   * 自定义拦截器
+   * @return
+   */
+  @Bean
+  public ShiroOauthFilter getShiroOAuth2Filter(){
+    return new ShiroOauthFilter();
+  }
 
   /**
    * 访问没有权限的页面的处理
