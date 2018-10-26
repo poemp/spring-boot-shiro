@@ -31,8 +31,13 @@ repositories {
 
 
 dependencies {
-    implementation('org.springframework.boot:spring-boot-starter')
-    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    implementation('org.springframework.boot:spring-boot-starter'){
+        exclude module: "spring-boot-starter-logginh"
+    }
+    testImplementation('org.springframework.boot:spring-boot-starter-test'){
+        exclude group:"commons-logging"
+        exclude module: "spring-boot-starter-logging"
+    }
     compile group: 'org.apache.shiro', name: 'shiro-spring', version: '1.4.0'
     compile("org.postgresql:postgresql:42.2.4")
     compile("org.jooq:jooq:3.11.4")
