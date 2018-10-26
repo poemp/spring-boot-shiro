@@ -1,6 +1,7 @@
 package org.poem.vo.login;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.poem.vo.UserInfoVO;
 
 public class LoginSuccessVo {
 
@@ -24,6 +25,20 @@ public class LoginSuccessVo {
      * 账号
      */
     private String userAccount;
+
+
+    /**
+     * 用户
+     */
+    private UserInfoVO userInfoVO;
+
+    public UserInfoVO getUserInfoVO() {
+        return userInfoVO;
+    }
+
+    public void setUserInfoVO(UserInfoVO userInfoVO) {
+        this.userInfoVO = userInfoVO;
+    }
 
     public Long getUserId() {
         return userId;

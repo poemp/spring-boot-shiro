@@ -125,6 +125,7 @@ public class JwtHelper {
      * @throws Exception
      */
     public static Map<String, Object> extractInfo(String token) throws Exception {
+        token = token.replaceAll("Banner ", "");
         Optional<Claims> claims = getClaimsFromToken(token);
         if (claims.isPresent()) {
             Map<String, Object> info = new HashMap<String, Object>();

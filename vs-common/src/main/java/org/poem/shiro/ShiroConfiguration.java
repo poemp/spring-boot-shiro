@@ -8,7 +8,6 @@ import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSource
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
-import org.poem.credentials.CredentialsMatcher;
 import org.poem.filter.ShiroFormAuthenticationFilter;
 import org.poem.filter.ShiroLogoutFilter;
 import org.poem.filter.ShiroOauthFilter;
@@ -124,7 +123,7 @@ public class ShiroConfiguration {
   public ShiroConfigRealm shiroConfigRealm() {
     logger.info("配置自定义的权限登录器: shiroConfigRealm()");
     ShiroConfigRealm shiroConfigRealm = new ShiroConfigRealm();
-    shiroConfigRealm.setCredentialsMatcher(credentialsMatcher());
+//    shiroConfigRealm.setCredentialsMatcher(credentialsMatcher());
     return shiroConfigRealm;
   }
 
@@ -189,16 +188,16 @@ public class ShiroConfiguration {
   }
 
 
-  /**
-   * 自定义密码比较器
-   *
-   * @return
-   */
-  @Bean
-  public CredentialsMatcher credentialsMatcher() {
-    logger.info("credentialsMatcher");
-    return new CredentialsMatcher();
-  }
+//  /**
+//   * 自定义密码比较器
+//   *
+//   * @return
+//   */
+//  @Bean
+//  public CredentialsMatcher credentialsMatcher() {
+//    logger.info("credentialsMatcher");
+//    return new CredentialsMatcher();
+//  }
 
   /**
    * 重复登陆

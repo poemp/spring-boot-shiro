@@ -8,11 +8,13 @@ import org.apache.shiro.authc.pam.UnsupportedTokenException;
 import org.apache.shiro.subject.Subject;
 import org.poem.Constant;
 import org.poem.jwt.JwtHelper;
+import org.poem.user.UserInfoService;
 import org.poem.vo.UserInfoVO;
 import org.poem.result.ResultVO;
 import org.poem.vo.login.LoginSuccessVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -26,13 +28,47 @@ public class LoginController {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
+    @Autowired
+    private UserInfoService userInfoService;
+    /**
+     *
+     * @param username
+     * @param password
+     * @return
+     */
+    @PostMapping(value = "/unauth")
+    public ResultVO<LoginSuccessVo> loginIn(String username, String password) {
+        if (StringUtils.isBlank(username)){
+            return new ResultVO<>(9999,null,"用户名不能为空");
+        }
+        if(StringUtils.isBlank(password)){
+             return new ResultVO<>(9999,null,"密码不能为空。");
+        }
+        UserInfoVO userInfoVO = userInfoService.findByUsername(username);
+        if (userInfoVO == null){
+            return new ResultVO<>(9999,null,"用户名不存在。");
+        }
+        if(userInfoVO.getLocked() != null && userInfoVO.getLocked()){
+            return new ResultVO<>(9999,null,"账号被锁定。");
+        }
+        Map<String, Object> claims = new HashMap<>(0);
+        claims.put(Constant.JWT_CLAIM_KEY, JSON.toJSONString(userInfoVO));
+        String token = JwtHelper.createJWT(claims, Constant.JWT_TTL);
+
+        LoginSuccessVo loginSuccessVo = new LoginSuccessVo();
+        loginSuccessVo.setAuthorization(token);
+        loginSuccessVo.setName(userInfoVO.getName());
+        loginSuccessVo.setUserId(userInfoVO.getUserId());
+        loginSuccessVo.setUserAccount(userInfoVO.getUserName());
+        loginSuccessVo.setUserInfoVO(userInfoVO);
+        return new ResultVO<>(0, loginSuccessVo, "login success");
+    }
     /**
      * 登陆
      * @param username
      * @param password
      * @return
      */
-    @PostMapping(value = "/unauth")
     public ResultVO<LoginSuccessVo> unauth(String username, String password) {
         if (StringUtils.isEmpty(username) && StringUtils.isEmpty(password)) {
             return new ResultVO<>(-1, null, "重新登陆。");

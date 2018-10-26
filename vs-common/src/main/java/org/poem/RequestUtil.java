@@ -58,7 +58,6 @@ public class RequestUtil {
         if(StringUtils.isEmpty(authorization)){
             return null;
         }
-        authorization = authorization.replaceAll("Banner ", "");
         try {
             Map<String, Object> map = JwtHelper.extractInfo(authorization);
             if (map == null){
