@@ -1,9 +1,11 @@
 package org.poem.vo;
 
+import org.poem.user.vo.UserDetailVO;
+
 import java.util.List;
 
 /** @author poem */
-public class UserInfoVO {
+public class UserInfoVO implements UserDetailVO {
 
   private Long userId;
 
@@ -37,6 +39,7 @@ public class UserInfoVO {
     this.userId = userId;
   }
 
+  @Override
   public Boolean getLocked() {
     return locked;
   }
@@ -65,6 +68,7 @@ public class UserInfoVO {
     this.name = name;
   }
 
+  @Override
   public String getUserName() {
     return userName;
   }
@@ -73,6 +77,7 @@ public class UserInfoVO {
     this.userName = userName;
   }
 
+  @Override
   public String getPassword() {
     return password;
   }
