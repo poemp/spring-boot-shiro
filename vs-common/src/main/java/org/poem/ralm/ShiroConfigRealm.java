@@ -1,12 +1,12 @@
 package org.poem.ralm;
 
 import com.alibaba.fastjson.JSONObject;
+import io.jsonwebtoken.ExpiredJwtException;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 import org.poem.Constant;
 import org.poem.filter.token.OAuthToken;
 import org.poem.jwt.JwtHelper;
@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.security.SignatureException;
 import java.util.List;
 import java.util.Map;
 
@@ -91,6 +92,13 @@ public class ShiroConfigRealm extends AuthorizingRealm {
       userInfoVO = JSONObject.parseObject(s, UserInfoVO.class);
     } catch (Exception e) {
       e.printStackTrace();
+      if (e instanceof ExpiredJwtException){
+        throw new LockedAccountException("the key is expire");
+      }else if( e instanceof SignatureException){
+        throw new LockedAccountException("the key is incorrect");
+      }else{
+        throw new LockedAccountException("the key is error");
+      }
     }
     logger.info("----->>userInfoVO=" + userInfoVO);
     //会抛出账号不存在的异常

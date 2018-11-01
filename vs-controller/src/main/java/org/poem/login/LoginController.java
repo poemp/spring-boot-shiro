@@ -39,17 +39,17 @@ public class LoginController {
     @PostMapping(value = "/unauth")
     public ResultVO<LoginSuccessVo> loginIn(String username, String password) {
         if (StringUtils.isBlank(username)){
-            return new ResultVO<>(9999,null,"用户名不能为空");
+            return new ResultVO<>(-9999,null,"用户名不能为空");
         }
         if(StringUtils.isBlank(password)){
-             return new ResultVO<>(9999,null,"密码不能为空。");
+             return new ResultVO<>(-9999,null,"密码不能为空。");
         }
         UserInfoVO userInfoVO = userInfoService.findByUsername(username);
         if (userInfoVO == null){
-            return new ResultVO<>(9999,null,"用户名不存在。");
+            return new ResultVO<>(-9999,null,"用户名不存在。");
         }
         if(userInfoVO.getLocked() != null && userInfoVO.getLocked()){
-            return new ResultVO<>(9999,null,"账号被锁定。");
+            return new ResultVO<>(-9999,null,"账号被锁定。");
         }
         Map<String, Object> claims = new HashMap<>(0);
         claims.put(Constant.JWT_CLAIM_KEY, JSON.toJSONString(userInfoVO));

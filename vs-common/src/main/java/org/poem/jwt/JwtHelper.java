@@ -4,7 +4,6 @@ import io.jsonwebtoken.*;
 import org.apache.shiro.codec.Base64;
 import org.poem.Constant;
 import org.poem.jwt.result.CheckResult;
-import org.poem.vo.UserInfoVO;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -113,6 +112,12 @@ public class JwtHelper {
                     .getBody();
             return Optional.of(claims);
         } catch (Exception e) {
+            e.printStackTrace();
+            if (e instanceof ExpiredJwtException){
+                throw e;
+            }else if(e instanceof SignatureException){
+                throw e;
+            }
             return Optional.empty();
         }
     }
