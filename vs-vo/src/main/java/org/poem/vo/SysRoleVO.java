@@ -18,7 +18,7 @@ public class SysRoleVO {
   private String description;
 
   /** 是否可用,如果不可用将不会添加给用户 */
-  private Boolean available = Boolean.FALSE;
+  private Boolean available;
 
   private List<SysPermissionVO> sysPermissions;
 

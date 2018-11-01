@@ -3,6 +3,9 @@ package org.poem.vo.login;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.poem.vo.UserInfoVO;
 
+/**
+ * @author poem
+ */
 public class LoginSuccessVo {
 
     /**
