@@ -129,7 +129,6 @@ public class LoginController {
         Map<String, Object> claims = new HashMap<>(0);
         claims.put(Constant.JWT_CLAIM_KEY, JSON.toJSONString(userInfoVO));
         String token = JwtHelper.createJWT(claims, Constant.JWT_TTL);
-
         LoginSuccessVo loginSuccessVo = new LoginSuccessVo();
         loginSuccessVo.setAuthorization(token);
         loginSuccessVo.setName(userInfoVO.getName());

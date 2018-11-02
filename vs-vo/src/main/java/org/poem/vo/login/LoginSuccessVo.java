@@ -19,6 +19,7 @@ public class LoginSuccessVo {
      */
     private String authorization;
 
+
     /**
      * 用户名字
      */

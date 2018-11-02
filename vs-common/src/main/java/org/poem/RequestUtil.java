@@ -1,15 +1,13 @@
 package org.poem;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import io.jsonwebtoken.Claims;
 import org.apache.commons.lang3.StringUtils;
 import org.poem.jwt.JwtHelper;
 import org.poem.vo.UserInfoVO;
 import org.poem.vo.login.LoginSuccessVo;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import java.util.Map;
 
 /**
  * @author poem
