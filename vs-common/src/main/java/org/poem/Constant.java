@@ -24,12 +24,11 @@ public class Constant {
     /**
      * token有效时间,10分钟
      */
-    public static final long JWT_TTL = 10;
+    public static final long JWT_TTL = 10 * 60 * 1000;
 
     /**
      * user key
      */
-    public static final String JWT_CLAIM_KEY ="USER";
+    public static final String JWT_CLAIM_KEY = "USER";
 
-    public static final String ORIGINAL_DATA_ID_FIELD_NAME="original_data_id";
 }

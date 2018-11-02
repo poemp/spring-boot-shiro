@@ -39,6 +39,7 @@ dependencies {
         exclude module: "spring-boot-starter-logging"
     }
     compile("org.apache.shiro:shiro-spring:1.4.0")
+    compile("org.apache.shiro:shiro-ehcache:1.4.0")
     compile("org.postgresql:postgresql:42.2.4")
     compile("org.jooq:jooq:3.11.4")
     compile("org.jooq:jooq-meta:3.11.4")
@@ -51,6 +52,5 @@ dependencies {
     compile("org.flywaydb:flyway-maven-plugin:3.0")
     compile("commons-collections:commons-collections:3.2.2")
     compile("org.apache.commons:commons-lang3:3.8.1")
-    compile("org.apache.shiro:shiro-ehcache:1.4.0")
     compile("org.reflections:reflections:0.9.10")
 }

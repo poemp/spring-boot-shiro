@@ -10,4 +10,9 @@ import java.lang.annotation.*;
 @Documented
 public @interface ShiroOauthodIgnore {
 
+    /**
+     * 取消的地址
+     * @return
+     */
+    String value() default "";
 }

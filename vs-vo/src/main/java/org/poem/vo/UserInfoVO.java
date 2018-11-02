@@ -1,6 +1,6 @@
 package org.poem.vo;
 
-import org.poem.user.vo.UserDetailVO;
+import org.poem.controller.user.vo.UserDetailVO;
 
 import java.util.List;
 

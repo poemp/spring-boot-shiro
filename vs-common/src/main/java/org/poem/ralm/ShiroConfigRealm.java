@@ -10,7 +10,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.poem.Constant;
 import org.poem.filter.token.OAuthToken;
 import org.poem.jwt.JwtHelper;
-import org.poem.user.UserInfoService;
+import org.poem.controller.user.UserInfoService;
 import org.poem.vo.SysPermissionVO;
 import org.poem.vo.SysRoleVO;
 import org.poem.vo.UserInfoVO;
