@@ -1,5 +1,7 @@
 package org.poem.controller.errot;
 
+import org.apache.commons.httpclient.HttpState;
+import org.apache.commons.httpclient.HttpStatus;
 import org.poem.annotation.ShiroOauthodIgnore;
 import org.poem.result.ResultVO;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,12 +35,12 @@ public class ErrorController implements org.springframework.boot.web.servlet.err
     public ResultVO<String> handleError(HttpServletRequest request){
         //获取statusCode:401,404,500
         Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
-        if(statusCode == 401){
-            return new ResultVO<>(401,"没有权限","");
-        }else if(statusCode == 404){
-            return new ResultVO<>(404,"没有找到","");
-        }else if(statusCode == 403){
-            return new ResultVO<>(403,"访问错误","");
+        if(statusCode == HttpStatus.SC_UNAUTHORIZED){
+            return new ResultVO<>(HttpStatus.SC_UNAUTHORIZED,"没有权限","");
+        }else if(statusCode == HttpStatus.SC_NOT_FOUND){
+            return new ResultVO<>( HttpStatus.SC_NOT_FOUND,"没有找到","");
+        }else if(statusCode == HttpStatus.SC_FORBIDDEN){
+            return new ResultVO<>(HttpStatus.SC_FORBIDDEN,"访问错误","");
         }else{
             return new ResultVO<>(500,"服务器错误","");
         }

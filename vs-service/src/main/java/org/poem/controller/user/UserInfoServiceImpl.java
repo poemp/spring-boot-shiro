@@ -38,6 +38,7 @@ public class UserInfoServiceImpl implements UserInfoService {
       return null;
     }
     UserInfoVO userInfoVO = new UserInfoVO();
+    userInfoVO.setUserId(tUserInfoRecord.getId());
     userInfoVO.setName(tUserInfoRecord.getName());
     userInfoVO.setUserName(tUserInfoRecord.getUsername());
     userInfoVO.setPassword(tUserInfoRecord.getPassword());
