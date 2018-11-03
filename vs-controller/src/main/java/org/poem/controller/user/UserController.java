@@ -32,6 +32,7 @@ public class UserController {
     LoginSuccessVo loginSuccessVo = RequestUtil.getLoginSuccessVo(request);
     if(loginSuccessVo != null){
       loginSuccessVo.setUserInfoVO(JSONObject.parseObject(loginSuccessVo.getAuthorization(), UserInfoVO.class));
+      loginSuccessVo.setAuthorization(null);
     }
     return new ResultVO<>(0,loginSuccessVo);
   }
