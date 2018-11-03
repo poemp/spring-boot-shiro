@@ -9,6 +9,8 @@ import org.poem.vo.login.LoginSuccessVo;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
+import static org.poem.Constant.AUTHORIZATION;
+
 /**
  * @author poem
  */
@@ -35,9 +37,9 @@ public class RequestUtil {
      * @return
      */
     public static String getAuthorization(HttpServletRequest request){
-        String token=request.getHeader("Authorization");
+        String token=request.getHeader(AUTHORIZATION);
         if(StringUtils.isEmpty(token)){
-            token=request.getParameter("Authorization");
+            token=request.getParameter(AUTHORIZATION);
         }
         if(StringUtils.isEmpty(token)){
             return null;

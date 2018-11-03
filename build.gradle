@@ -53,4 +53,5 @@ dependencies {
     compile("commons-collections:commons-collections:3.2.2")
     compile("org.apache.commons:commons-lang3:3.8.1")
     compile("org.reflections:reflections:0.9.10")
+    compile("com.github.jponge:lzma-java:1.2")
 }

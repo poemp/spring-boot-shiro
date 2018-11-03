@@ -18,8 +18,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.poem.Constant.AUTHORIZATION;
 
 /**
  * @author poem
@@ -32,26 +35,26 @@ public class LoginController {
 
     @Autowired
     private UserInfoService userInfoService;
+
     /**
-     *
      * @param username
      * @param password
      * @return
      */
     @PostMapping(value = "/unauth")
-    public ResultVO<LoginSuccessVo> loginIn(String username, String password) {
-        if (StringUtils.isBlank(username)){
-            return new ResultVO<>(-9999,null,"用户名不能为空");
+    public ResultVO<LoginSuccessVo> loginIn(String username, String password, HttpServletResponse response) {
+        if (StringUtils.isBlank(username)) {
+            return new ResultVO<>(-9999, null, "用户名不能为空");
         }
-        if(StringUtils.isBlank(password)){
-             return new ResultVO<>(-9999,null,"密码不能为空。");
+        if (StringUtils.isBlank(password)) {
+            return new ResultVO<>(-9999, null, "密码不能为空。");
         }
         UserInfoVO userInfoVO = userInfoService.findByUsername(username);
-        if (userInfoVO == null){
-            return new ResultVO<>(-9999,null,"用户名不存在。");
+        if (userInfoVO == null) {
+            return new ResultVO<>(-9999, null, "用户名不存在。");
         }
-        if(userInfoVO.getLocked() != null && userInfoVO.getLocked()){
-            return new ResultVO<>(-9999,null,"账号被锁定。");
+        if (userInfoVO.getLocked() != null && userInfoVO.getLocked()) {
+            return new ResultVO<>(-9999, null, "账号被锁定。");
         }
         Map<String, Object> claims = new HashMap<>(0);
         claims.put(Constant.JWT_CLAIM_KEY, JSON.toJSONString(userInfoVO));
@@ -63,10 +66,13 @@ public class LoginController {
         loginSuccessVo.setUserId(userInfoVO.getUserId());
         loginSuccessVo.setUserAccount(userInfoVO.getUserName());
         loginSuccessVo.setUserInfoVO(userInfoVO);
+        response.setHeader(AUTHORIZATION, token);
         return new ResultVO<>(0, loginSuccessVo, "login success");
     }
+
     /**
      * 登陆
+     *
      * @param username
      * @param password
      * @return

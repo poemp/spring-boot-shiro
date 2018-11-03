@@ -31,4 +31,10 @@ public class Constant {
      */
     public static final String JWT_CLAIM_KEY = "USER";
 
+
+    /**
+     * 权限的key
+     */
+    public static final String AUTHORIZATION = "Authorization";
+
 }
