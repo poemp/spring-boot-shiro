@@ -1,4 +1,4 @@
-package org.poem.controller.user;
+package org.poem.service.user;
 
 import org.jooq.Record;
 import org.poem.jooq.tables.TSysPermission;

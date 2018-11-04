@@ -9,7 +9,7 @@ import org.apache.shiro.subject.Subject;
 import org.poem.Constant;
 import org.poem.annotation.ShiroOauthodIgnore;
 import org.poem.jwt.JwtHelper;
-import org.poem.controller.user.UserInfoService;
+import org.poem.service.user.UserInfoService;
 import org.poem.vo.UserInfoVO;
 import org.poem.result.ResultVO;
 import org.poem.vo.login.LoginSuccessVo;

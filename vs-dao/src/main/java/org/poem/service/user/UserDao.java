@@ -1,4 +1,4 @@
-package org.poem.controller.user;
+package org.poem.service.user;
 
 import org.jooq.Configuration;
 import org.jooq.DSLContext;

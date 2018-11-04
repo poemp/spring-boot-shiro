@@ -1,4 +1,4 @@
-package org.poem.controller.user;
+package org.poem.service.user;
 
 
 import org.poem.vo.UserInfoVO;

@@ -1,4 +1,4 @@
-package org.poem.controller.user;
+package org.poem.service.user;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.shiro.authz.annotation.RequiresPermissions;

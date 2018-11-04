@@ -1,4 +1,4 @@
-package org.poem.controller.user.vo;
+package org.poem.service.user.vo;
 
 /**
  * @author poem

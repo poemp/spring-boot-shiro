@@ -58,6 +58,7 @@ public class ShiroOauthFilter extends AuthenticatingFilter {
         //获取请求token，如果token不存在，直接返回401
         String token = RequestUtil.getAuthorization((HttpServletRequest) request);
         if(StringUtils.isBlank(token)){
+            //跨域访问
             HttpServletResponse httpResponse = (HttpServletResponse) response;
             httpResponse.setContentType("application/json;charset=utf-8");
             httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
