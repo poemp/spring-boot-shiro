@@ -71,11 +71,11 @@ public class ShiroConfiguration {
     Set<String> path = OauthodIgnoreUtils.getOathhodPath("org.poem");
     for (String s : path) {
       logger.info("Mapped Oauthod:" + s);
-      filterChainDefinitionMap.put(s, "oauth");
+      filterChainDefinitionMap.put(s, "anon");
     }
     shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
-    Map<String, Filter> filters = new HashMap<>(1);
+    Map<String, Filter> filters = new HashMap<>(2);
     filters.put("logout", new ShiroLogoutFilter());
     filters.put("oauth",getShiroOAuth2Filter());
     shiroFilterFactoryBean.setFilters(filters);
